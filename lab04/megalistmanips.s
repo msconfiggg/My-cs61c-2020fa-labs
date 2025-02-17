@@ -66,20 +66,30 @@ map:
     # are modified by the callees, even when we know the content inside the functions 
     # we call. this is to enforce the abstraction barrier of calling convention.
 mapLoop:
-    add t1, s0, x0      # load the address of the array of current node into t1
+    lw t1, 0(s0)        # load the address of the array of current node into t1
     lw t2, 4(s0)        # load the size of the node's array into t2
 
+    slli t0, t0, 2      # shifted left to correspond to 4 bytes per data
     add t1, t1, t0      # offset the array address by the count
     lw a0, 0(t1)        # load the value at that address into a0
 
+    addi sp, sp, -8
+    sw ra, 0(sp)        # store ra
+    sw t1, 4(sp)        # store t1 for it is used in the function
+
     jalr s1             # call the function on that value.
 
+    lw ra, 0(sp)        # restore ra
+    lw t1, 4(sp)        # restore t1
+    addi sp, sp, 8
+
     sw a0, 0(t1)        # store the returned value back into the array
+    srli t0, t0, 2      # shifted right to restore counter
     addi t0, t0, 1      # increment the count
     bne t0, t2, mapLoop # repeat if we haven't reached the array size yet
 
-    la a0, 8(s0)        # load the address of the next node into a0
-    lw a1, 0(s1)        # put the address of the function back into a1 to prepare for the recursion
+    lw a0, 8(s0)        # load the address of the next node into a0
+    mv a1, s1           # put the address of the function back into a1 to prepare for the recursion
 
     jal  map            # recurse
 done:
@@ -148,14 +158,14 @@ printMeAndRecurse:
 printLoop:
     slli t2, t1, 2
     add t4, t3, t2
-    lw a1, 0(t4) # a0 gets value in current node's array at index t1
+    lw a1, 0(t4) # a1 gets value in current node's array at index t1
     li a0, 1  # preparte for print integer ecall
     ecall
-    li a1, ' ' # a0 gets address of string containing space
+    li a1, ' ' # a1 gets address of string containing space
     li a0, 11  # prepare for print string ecall
     ecall
     addi t1, t1, 1
-  li t6 5
+    li t6 5
     bne t1, t6, printLoop # ... while i!= 5
     li a1, '\n'
     li a0, 11
