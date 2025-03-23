@@ -1,20 +1,23 @@
 --- not autograded ---
 
 Part 1
-    blocksize = 20, n = 100: 
-    blocksize = 20, n = 1000: 
-    blocksize = 20, n = 2000: 
-    blocksize = 20, n = 5000: 
-    blocksize = 20, n = 10000: 
+    blocksize = 20, n = 100: 0.003 milliseconds, 0.003 milliseconds
+    blocksize = 20, n = 1000: 0.493 milliseconds, 0.265 milliseconds
+    blocksize = 20, n = 2000: 7.846 milliseconds, 2.008 milliseconds
+    blocksize = 20, n = 5000: 95.836 milliseconds, 11.619 milliseconds
+    blocksize = 20, n = 10000: 519.301 milliseconds, 77.858 milliseconds
 
-    Checkoff Question 1:
-    Checkoff Question 2:
+    Checkoff Question 1: 1000 * 1000
+    Checkoff Question 2: 对于较小的矩阵，分块带来的计算开销（多层循环控制、额外的计算和判断）可能会抵消其带来的缓存性能优化。此时，非分块版本的性能较好。
+                        随着矩阵尺寸的增加，缓存分块带来的局部性优势逐渐占据主导地位。通过减少缓存未命中，分块能够显著提升计算效率，最终超过非分块的实现。
 
 Part 2
-    blocksize = 50, n = 10000:
-    blocksize = 100, n = 10000:
-    blocksize = 500, n = 10000:
-    blocksize = 1000, n = 10000:
-    blocksize = 5000, n = 10000:
+    blocksize = 50, n = 10000: 593.316 milliseconds, 89.75 milliseconds
+    blocksize = 100, n = 10000: 480.175 milliseconds, 59.206 milliseconds
+    blocksize = 500, n = 10000: 446.47 milliseconds, 70.771 milliseconds
+    blocksize = 1000, n = 10000: 477.159 milliseconds, 77.131 milliseconds
+    blocksize = 5000, n = 10000: 447.97 milliseconds, 431.566 milliseconds
 
-    Checkoff Question 3:
+    Checkoff Question 3: 性能先提升后下降。如果分块过小，每次访问的内存块就会更频繁地换出缓存，导致缓存的重用率较低。因为块太小，可能需要频繁地访问外部内存，导致性能瓶颈。
+                        当分块大小适中时，每个块能够充分利用缓存的空间，同时避免过度的内存访问。在这种情况下，缓存的局部性得到最好的利用。
+                        当分块大小过大时，每个块可能会占用过多的缓存，导致其他数据无法加载到缓存中，这会导致缓存未命中率的提高，从而降低性能。

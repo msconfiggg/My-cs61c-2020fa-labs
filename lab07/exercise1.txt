@@ -1,24 +1,25 @@
 Scenario 1
-    1.
-    2.
-    3.
+    1. step size, block size
+    2. 0.0
+    3. step size, 1
 
 Scenario 2
-    1.
-    2.
-    3.
+    1. 2
+    2. MHHH
+    3. 1.0
 
 Scenario 3
-    1.
-    2.
-    3.
-    4.
-    5.
+    1. 0.50, 0.00, 0.25
+    2. 16, 16
+    3. 16
+    4. block size
+    5. =, =, +, =
 
 --- lines below are ignored by the AG ---
 
-Checkoff Question 1:
-Checkoff Question 2:
-Checkoff Question 3:
-Checkoff Question 4:
-Checkoff Question 5:
+Checkoff Question 1: step size太大，block size太小，导致每次都只用到第一块block，每次都未命中
+Checkoff Question 2: 调小step size，或调大block size
+Checkoff Question 3: 第一次取，未命中M，第二次存同一个数，命中M，第三、四次增加8bytes，由于block为16bytes，还在同一个块中，都为H
+Checkoff Question 4: 因为array size等于cache size，所以后面重复执行时都在cache里，都是H
+Checkoff Question 5: 我们对数组进行分块，块大小等于cache size，每次对这块数组执行所有函数，然后换一批
+Checkoff Question 6: 增加L2的block size可以在L2中存放更多数据而不会对L1造成影响

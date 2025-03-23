@@ -1,8 +1,8 @@
-1.
-2.
+1. jki, kji
+2. ikj, kij
 
 --- lines below are ignored by the AG ---
 
-Checkoff Question 1:
-Checkoff Question 2:
-Checkoff Question 3:
+Checkoff Question 1: 最内层循环步长为1，空间局部性好
+Checkoff Question 2: 最内层循环步长为n，空间局部性差
+Checkoff Question 3: 步幅为1，内存访问连续，缓存局部性好，缓存命中率高，性能最佳；步幅为n，跨行访问，内存访问跳跃，缓存命中率低，性能差。
