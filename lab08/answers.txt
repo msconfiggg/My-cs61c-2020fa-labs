@@ -1,19 +1,19 @@
 Exercise 1:
-    1.
-    2.
-    3.
+    1. 8
+    2. 1, 9, 0, 9
+    3. No, No
 
 Exercise 2:
-    1.
+    1. 00, 20, 40, 60, 80, A0, C0, E0, 01, 21
 
 Exercise 3:
-    1.
+    1. Physical Memory Size
 
 --- lines below are ignored by the AG ---
 
 Exercise 1 Checkoff Questions:
-    1.
-    2.
+    1. 如果TLB未命中：需要查询页表，获取VPN → PPN的映射。 如果发生 Page Fault，需要：1. 分配新的物理页 2. 更新页表 3. 更新TLB
+    2. 这意味着页表可以映射更多的虚拟页，但由于物理内存有限，并不是所有映射都可以同时驻留在物理内存中。
 
 Exercise 4 Checkoff Question:
-    1.
+    1. I don't know.
